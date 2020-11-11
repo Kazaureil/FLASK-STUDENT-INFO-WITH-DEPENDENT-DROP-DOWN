@@ -1,0 +1,105 @@
+{%extends "layout.html"%}
+{% block body %}
+<center>
+<br>
+<h3 class="text-warning">📝 Add Information</h3>
+<br>
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card card-body">
+                  <form action="{{url_for('add')}}" method="POST">
+                        <div class="form-group text-warning">
+                          <label class="col-sm-2 control-label text-primary"><b>ID Number</b></label>
+                          <div class = "col-sm-9">
+                            {% if idno == students[3]%}
+                            <div class="alert alert-danger" role="alert">
+                              ID Number Already Taken! Enter different value
+                            </div>
+                            <input type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control text-warning" name="idno" placeholder="e.g. 0000-0000"  required>
+                          </div>
+                            {% elif idno != students[3]%}
+                           <input type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control text-warning" name="idno" placeholder="e.g. 0000-0000"  required>
+                          {%endif%}
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>First Name</b></label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control text-warning" name="first_name" placeholder="e.g. Humphrey John" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>Last Name</b></label>
+                          <div class = "col-sm-9">
+                            <input type="text" class="form-control text-warning" name="last_name" placeholder="e.g. Sim" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>Year Level</b></label>
+                          <div class = "col-sm-9">
+                            <input type="number" class="form-control text-warning" name="yrlvl" placeholder="e.g. 4" min="0" max="4" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>Gender</b></label>
+                          <div class = "col-sm-9">
+                            <select class="custom-select text-warning" name="gender" required>
+                              <option disabled selected>--Choose Gender--</option>
+                              <option data-ref="Male">Male</option>
+                              <option data-ref="Female">Female</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div id="check"></div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>Course</b></label>
+                          <div class = "col-sm-9">
+                            <select data-target="dept_list" class="custom-select course_list selectFilter text-warning" name="course" required>
+                              <option value="" disabled selected>--Choose Course--</option>
+                              {%for courses in course %}
+                              <option data-ref="{{courses[1]}}">{{courses[0]}}</option>
+                              {%endfor%}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>Department</b></label>
+                          <div class = "col-sm-9">
+                            <select data-target="college_list" class="custom-select dept_list selectFilter text-warning" name="dept" required>
+                              <option value="" disabled selected>--Choose Dept--</option>
+                              {%for dept in department %}
+                               <option data-ref="{{dept[1]}}" data-belong="{{dept[0]}}">{{dept[0]}}</option>
+                              {%endfor%}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-2 control-label text-primary"><b>College</b></label>
+                          <div class = "col-sm-9">
+                            <select class="custom-select college_list selectFilter text-warning" name="college" required>
+                              <option value="" disabled selected>--Choose college--</option>
+                              {%for colleges in college %}
+                              <option data-belong="{{colleges[0]}}" >{{colleges[0]}}</option>
+                              {%endfor%}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="box-footer">
+                          <a href="/"><button type="button" class="btn btn-warning col-md-3">BACK</button></a>
+                          <input name="save" type="submit" class="btn btn-primary col-md-3" value="Save">
+                        </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</center>
+{%endblock%}

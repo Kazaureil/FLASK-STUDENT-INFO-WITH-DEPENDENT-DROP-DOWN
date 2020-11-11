@@ -1,0 +1,46 @@
+{%extends "layout.html"%}
+{% block body %}
+<br>
+<div align="center">
+  <h3 class="text-warning">🗂 Course Information</h3>
+</div>
+<br>
+	<div class="text-right col-sm-12">
+	<a href="/">
+		<button type="button" class="btn btn-warning col-md-1">BACK</button>
+	</a>
+     <a href="/course_only/">
+    <button type="button" class="btn btn-primary btn-flat col-md-1">COURSE ONLY</button>
+    </a>
+    </div>
+</br>
+<br>
+<center>
+    <div class="body">
+    	<div class="container">
+    		<input class="form-control mb-4 card card-body text-warning" id="tableSearch" type="text" placeholder="🔍 Type something to search list....">
+      <table class="table table-hover table-primary">
+        <thead class="thead-dark" align="center">
+          <tr>
+            <th scope="col">College</th>
+            <th scope="col">Department</th>
+            <th scope="col">Course</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr>
+            {% for row in page %}
+            <td class="text-primary">{{ row[3] }}</td>
+            <td class="text-primary">{{ row[2] }}</td>
+            <td class="text-primary">{{ row[1] }}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+      </table>
+    </div>
+	</div>
+  </div>
+</center>
+
+
+{% endblock %}

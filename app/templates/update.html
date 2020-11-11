@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block body %}
+<center>
+<br>
+  <h3 class="text-warning">📚 Update Information</h3>
+<br>
+<br>
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card card-body">
+                {% for row in students %}
+                <form class="form-horizontal" action="/update_info/{{row[0]}}/" method="POST">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label text-primary">ID Number</label>
+                    <div class = "col-sm-9">
+                      <input name="idno" value="{{ row[3] }}" type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control text-warning" autocomplete="off" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label text-primary">First Name</label>
+                    <div class = "col-sm-9">
+                      <input name="first_name" value="{{ row[1] }}" type="text" class="form-control text-warning" autocomplete="off" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label text-primary">Last Name</label>
+                    <div class = "col-sm-9">
+                      <input name="last_name" value="{{ row[2] }}" type="text" class="form-control text-warning" autocomplete="off" required>
+                    </div>
+                  </div>
+
+                  <div class="form-g  roup">
+                    <label class="col-sm-2 control-label text-primary">Year Level</label>
+                    <div class = "col-sm-9">
+                      <input name="yrlvl" value="{{ row[4] }}" type="number" class="form-control text-warning" min="0" max="4" autocomplete="off" required>
+                    </div>
+                  </div>
+                    <br>
+                  <div class="form-group">
+                  <label class="col-sm-2 control-label text-primary">Gender</label>
+                  <div class = "col-sm-9">
+                    <select class="custom-select text-warning" name="gender" required>
+                      {%if row[5] == "Male" %}
+                      <option value="Male"selected>Male</option>
+                      <option value="Female">Female</option>
+                      {%elif row[5] == "Female" %}
+                      <option value ="Female"selected>Female</option>
+                      <option value="Male">Male</option>
+                      {%else%}
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      {%endif%}
+                    </select>
+                  </div>
+                </div>
+                <div id="check"></div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label text-primary">College</label>
+                  <div class = "col-sm-9">
+                    <select data-target="dept_list text-primary" class="custom-select course_list selectFilter text-warning" name="course" required>
+                      {%for courses in course %}
+                      {%if courses[0] == row[6]%}
+                      <option data-ref="{{courses[1]}}"selected>{{courses[0]}}</option>
+                      {%else%}
+                      <option data-ref="{{courses[1]}}">{{courses[0]}}</option>
+                      {%endif%}
+                      {%endfor%}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label text-primary">Department</label>
+                  <div class = "col-sm-9">
+                    <select data-target="college_list" class="custom-select dept_list selectFilter text-warning" name="dept" required>
+                      {%for dept in department %}
+                      {%if dept[2]== row[7]%}
+                      <option data-ref="{{dept[1]}}" data-belong="{{dept[0]}}"selected>{{dept[0]}}</option>
+                      {%else%}
+                      <option data-ref="{{dept[1]}}" data-belong="{{dept[0]}}">{{dept[0]}}</option>
+                      {%endif%}
+                      {%endfor%}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label text-primary">Course</label>
+                  <div class = "col-sm-9">
+                    <select class="custom-select college_list selectFilter text-warning" name="college" required>
+                      {%for colleges in college %}
+                      {%if colleges[0] == row[8] %}
+                      <option data-belong="{{colleges[0]}}"selected>{{colleges[0]}}</option>
+                      {%else%}
+                      <option data-belong="{{colleges[0]}}" >{{colleges[0]}}</option>
+                      {%endif%}
+                      {%endfor%}
+                    </select>
+                  </div>
+                </div>
+                  <div class="box-footer">
+                    <a href="/"><button type="button" class="btn btn-warning col-md-3">Back</button></a>
+                    <input name="update" type="submit" class="btn btn-primary col-md-3" value="Update">
+                  </div>
+                  {% endfor %}
+                </form>
+          </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </center>
+
+{% endblock %}
