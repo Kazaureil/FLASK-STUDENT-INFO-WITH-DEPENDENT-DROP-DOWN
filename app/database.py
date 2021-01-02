@@ -2,8 +2,8 @@ from app import app, mysql
 
 class Database(object):
 
-	def __init__(self, id_data = None, first_name = None, last_name = None, idno = None, yrlvl = None, gender = None, college = None, dept = None, course = None):
-		self.id_data = id_data
+	def __init__(self, uid = None, first_name = None, last_name = None, idno = None, yrlvl = None, gender = None, college = None, dept = None, course = None):
+		self.uid = uid
 		self.first_name = first_name
 		self.last_name = last_name
 		self.idno = idno
@@ -62,20 +62,20 @@ class Database(object):
 	@classmethod
 	def get_data(cls,self):
 		cur = mysql.connection.cursor()
-		cur.execute('SELECT * FROM students WHERE id_data = %s', [self])
+		cur.execute('SELECT * FROM students WHERE uid = %s', [self])
 		data = cur.fetchall()
 		cur.close()
 		return data
 
 
-	def update_info(self, id_data = None):
+	def update_info(self, uid = None):
 		cur = mysql.connection.cursor()
-		cur.execute("UPDATE students SET first_name = %s, last_name = %s, idno = %s, yrlvl = %s, gender = %s, college = %s, dept = %s, course = %s WHERE id_data = %s",(self.first_name, self.last_name, self.idno, self.yrlvl, self.gender, self.college, self.dept, self.course, self.id_data))
+		cur.execute("UPDATE students SET first_name = %s, last_name = %s, idno = %s, yrlvl = %s, gender = %s, college = %s, dept = %s, course = %s WHERE uid = %s",(self.first_name, self.last_name, self.idno, self.yrlvl, self.gender, self.college, self.dept, self.course, self.uid))
 		mysql.connection.commit()
 
 
-	def delete_info(self, id_data = None):
+	def delete_info(self, uid = None):
 		cur = mysql.connection.cursor()
-		cur.execute("DELETE FROM students WHERE id_data = %s",[self.id_data])
+		cur.execute("DELETE FROM students WHERE uid = %s",[self.uid])
 		mysql.connection.commit()
 
